@@ -20,33 +20,13 @@
         };
 
         
-        showMyDB()
+        
         start();
         detectPersonalLvl();
         rememberMyFilms();
         writeYoreGenris();
+        showMyDB()
 
-
-        function showMyDB() {
-
-            let private = personalMoviedDB.private;
-            
-            if(private === false) {
-                console.log(personalMoviedDB);
-            }
-            
-        };
-
-        function writeYoreGenris() {
-
-            for(let i = 1; i <= 3; i++) {
-                personalMoviedDB.genres.push(prompt(`Ваш любимый жанр под номером: ${i}.`));
-            }
-        }
-        
-
-
-        
         function start() {
             numberOfFilms = +prompt('Сколько фильмов вы уже посмотрели?');
 
@@ -55,61 +35,73 @@
             }
         }
            
-        
+        function detectPersonalLvl() {
+
+                if (isNaN(numberOfFilms)) {
+                        alert('Введите число! Перезагрузите страницу!');
+                        
+                } else if (numberOfFilms < 10) {
+                        alert('Просмотренно довольно мало фильмов :(');
+
+                } else if (numberOfFilms > 10 && numberOfFilms <= 30) {
+                        alert('Вы класический зритель!')
+
+                } else if (numberOfFilms > 30) {
+                        alert('Вы киноман!')
+            }
+        }
+
+
 
         function rememberMyFilms() {
 
             for (let i = 0 ; i < 1; i++) {
-            let lastMovie = prompt('Один из последних просмотренных фильмов?');
+                
+                let lastMovie = prompt('Один из последних просмотренных фильмов?');
 
                 if ( lastMovie === null || lastMovie.length > 50 || lastMovie === "" ) {   
                     alert('Некоректные данные!')
                     i--  
 
-                } else {
-                    
+                } else {                  
                     for (let i = 0 ; i < 1; i++) {
 
                        let scoresAnswer = +prompt('На сколько оцените фильм?');
 
-                    if ( scoresAnswer != null && scoresAnswer <= 5 && scoresAnswer != 0) {
-                        personalMoviedDB.movies[lastMovie] = scoresAnswer;
+                        if ( scoresAnswer != null && scoresAnswer <= 5 && scoresAnswer != 0) {
+                            personalMoviedDB.movies[lastMovie] = scoresAnswer;
 
-                        let p = document.querySelector('#one');
-                        p.textContent = `Фильм: ${lastMovie} Оценка: ${scoresAnswer}` ;
+                            let p = document.querySelector('#one');
+                            p.textContent = `Фильм: ${lastMovie} Оценка: ${scoresAnswer}` ;
 
-                    } else {
-                        alert('Оцените числом от 1 до 5')
-                        i--
-                    }
-                    }
-                    
+                        } else {
+                            alert('Оцените числом от 1 до 5')
+                            i--
+                        }
+                    }                   
                 }  
-        }
-        }
-
-        
-
-        function detectPersonalLvl() {
-
-            if (isNaN(numberOfFilms)) {
-                    alert('Введите число! Перезагрузите страницу!');
-                    
-                } else if (numberOfFilms < 10) {
-                    alert('Просмотренно довольно мало фильмов :(');
-
-                } else if (numberOfFilms > 10 && numberOfFilms <= 30) {
-                    alert('Вы класический зритель!')
-
-                } else if (numberOfFilms > 30) {
-                    alert('Вы киноман!')
-                }
+            }
         }
 
-        
+        function writeYoreGenris() {
+
+            for(let i = 1; i <= 3; i++) {
+
+                personalMoviedDB.genres.push(prompt(`Ваш любимый жанр под номером: ${i}.`));
+
+               }
+            }
+
+
+        function showMyDB() {
+
+            let private = personalMoviedDB.private;
             
-
-            
+            if(private === false) {
+                console.log(personalMoviedDB);
+            }         
+        };
+                       
     </script>
 </body>
 </html>
